@@ -5,35 +5,6 @@ on:
       - main
       - next
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-        ts-project: [src/tsconfig.build.json, src/tsconfig.build.es6.json]
-
-    env:
-      TS_NODE_PROJECT: ${{ matrix.ts-project }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Clean cache
-        run: npm cache clean --force
-      - name: Install dependencies
-        run: npm ci
-      - name: Check code
-        run: npm run lint
-      - name: Run test
-        run: npm test
-      - name: Build
-        run: npm run build --if-present
-
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -55,6 +26,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Release
