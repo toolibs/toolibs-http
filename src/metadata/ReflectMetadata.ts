@@ -1,5 +1,3 @@
-import { cleanUpMetadata } from "../utils";
-
 export class ReflectMetadata {
     static setMetadata<Value = unknown>(
         target: Object,
