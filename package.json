@@ -14,9 +14,7 @@
     "test": "jest",
     "test:log": "jest --verbose=true",
     "lint": "eslint \"{src,__tests__}/**/*.ts\"",
-    "format": "prettier --check \"src/**/*.ts\" \"__tests__/**/*.ts\"",
-    "publish-please": "publish-please",
-    "prepublish": "publish-please --check --push guard"
+    "format": "prettier --check \"src/**/*.ts\" \"__tests__/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -52,5 +50,18 @@
   },
   "dependencies": {
     "inversify": "^6.0.2"
+  },
+  "release": {
+    "branches": [
+      "main",
+      {
+        "name": "next",
+        "prerelease": true
+      }
+    ]
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
   }
 }
