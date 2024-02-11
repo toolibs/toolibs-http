@@ -1,0 +1,28 @@
+import {
+    ReflectControllerMetadata,
+    Controller,
+    ControllerProps,
+} from "../../src";
+
+@Controller("/test")
+class TestController {}
+
+describe("Controller", () => {
+    describe("ReflectControllerMetadata", () => {
+        let controllerMetadata: ControllerProps;
+
+        beforeEach(() => {
+            controllerMetadata =
+                ReflectControllerMetadata.getMetadata(TestController);
+        });
+
+        it("should metadata be defined", () => {
+            expect(controllerMetadata).toBeDefined();
+        });
+
+        it("should return correct metadata for TestController", () => {
+            expect(controllerMetadata.target).toBe(TestController);
+            expect(controllerMetadata.prefix).toBe("/test");
+        });
+    });
+});
