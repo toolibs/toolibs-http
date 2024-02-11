@@ -1,6 +1,7 @@
 import {
     ClassType,
     MethodType,
+    MiddlewareType,
     NormaliseType,
     ParameterName,
     RouteHandlerMethod,
@@ -21,9 +22,11 @@ export type RouteProps = {
     method: MethodType;
     methodName: string;
     option?: RouteOption;
+    middlewares: Array<MiddlewareType>;
 };
 
 export type ControllerProps = {
     target: ClassType;
     prefix: string;
+    middlewares: Array<MiddlewareType>;
 };

@@ -1,6 +1,6 @@
 import { decorate, injectable } from "inversify";
 
-import { ClassType, ControllerArgs, ControllerProps } from "../types";
+import { ClassType, ControllerArgs } from "../types";
 import { ReflectControllerMetadata } from "../metadata";
 
 export abstract class ControllerDecoratorFactory {
@@ -9,9 +9,15 @@ export abstract class ControllerDecoratorFactory {
             // Register service
             decorate(injectable(), target);
 
-            const props: ControllerProps = { ...args, target };
+            let metadata = ReflectControllerMetadata.getMetadata(target);
 
-            ReflectControllerMetadata.setMetadata(target, props);
+            if (metadata) {
+                metadata = { ...metadata, ...args, target };
+            } else {
+                metadata = { ...args, target, middlewares: [] };
+            }
+
+            ReflectControllerMetadata.setMetadata(target, metadata);
         };
     }
 }

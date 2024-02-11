@@ -33,7 +33,9 @@ describe("Handlers", () => {
         let routeMetadata: RouteMetadata;
 
         beforeEach(() => {
-            routeMetadata = ReflectHandleMetadata.getMetadata(TestController);
+            routeMetadata = ReflectHandleMetadata.getMetadata(
+                TestController,
+            ) as RouteMetadata;
         });
 
         afterAll(() => {
@@ -53,6 +55,7 @@ describe("Handlers", () => {
             expect(routeMetadata["hello"].method).toBe("get");
             expect(routeMetadata["hello"].path).toBe("/");
             expect(routeMetadata["hello"].methodName).toBe("hello");
+            expect(routeMetadata["hello"].middlewares.length).toBe(0);
             expect(routeMetadata["hello"].option).not.toBeDefined();
         });
 

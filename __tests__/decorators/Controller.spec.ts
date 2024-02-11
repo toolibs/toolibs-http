@@ -12,8 +12,9 @@ describe("Controller", () => {
         let controllerMetadata: ControllerProps;
 
         beforeEach(() => {
-            controllerMetadata =
-                ReflectControllerMetadata.getMetadata(TestController);
+            controllerMetadata = ReflectControllerMetadata.getMetadata(
+                TestController,
+            ) as ControllerProps;
         });
 
         it("should metadata be defined", () => {
@@ -23,6 +24,7 @@ describe("Controller", () => {
         it("should return correct metadata for TestController", () => {
             expect(controllerMetadata.target).toBe(TestController);
             expect(controllerMetadata.prefix).toBe("/test");
+            expect(controllerMetadata.middlewares.length).toBe(0);
         });
     });
 });

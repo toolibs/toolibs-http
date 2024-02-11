@@ -3,7 +3,7 @@ import { TYPES } from "../constants";
 import { ReflectMetadata } from "./ReflectMetadata";
 
 export class ReflectHandleMetadata {
-    static getMetadata(target: Object): RouteMetadata {
+    static getMetadata(target: Object): RouteMetadata | undefined {
         return ReflectMetadata.getMetadata(target, TYPES.RouteMetadata);
     }
 

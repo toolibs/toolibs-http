@@ -11,10 +11,19 @@ export abstract class HandleDecoratorFactory {
             const metadata =
                 ReflectHandleMetadata.getMetadata(target.constructor) || {};
 
-            metadata[methodName] = {
-                ...args,
-                methodName,
-            };
+            if (metadata[methodName]) {
+                metadata[methodName] = {
+                    ...metadata[methodName],
+                    ...args,
+                    methodName,
+                };
+            } else {
+                metadata[methodName] = {
+                    ...args,
+                    methodName,
+                    middlewares: [],
+                };
+            }
 
             ReflectHandleMetadata.setMetadata(target.constructor, metadata);
         };

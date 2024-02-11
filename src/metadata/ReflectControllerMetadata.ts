@@ -3,7 +3,7 @@ import { TYPES } from "../constants";
 import { ReflectMetadata } from "./ReflectMetadata";
 
 export class ReflectControllerMetadata {
-    static getMetadata(target: Object): ControllerProps {
+    static getMetadata(target: Object): ControllerProps | undefined {
         return ReflectMetadata.getMetadata(target, TYPES.ControllerMetadata);
     }
 

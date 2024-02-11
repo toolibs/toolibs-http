@@ -1,5 +1,3 @@
-import { IncomingMessage, ServerResponse } from "http";
-
 /**
  * Class type.
  */
@@ -13,15 +11,15 @@ export type RouteHandlerMethod<
     Next extends NextFunction = NextFunction,
 > = (request: Req, response: Res, next?: Next) => any;
 
-export interface Middleware<
-    Req extends IncomingMessage = IncomingMessage,
-    Res extends ServerResponse = ServerResponse,
+export interface MiddlewareInterface<
+    Req = any,
+    Res = any,
     Next extends NextFunction = NextFunction,
 > {
     use(request: Req, response: Res, next: Next): void;
 }
 
-type MiddlewareConstructor = ClassType<Middleware>;
+export type MiddlewareConstructor = ClassType<MiddlewareInterface>;
 
 export type MiddlewareType =
     | MiddlewareConstructor
